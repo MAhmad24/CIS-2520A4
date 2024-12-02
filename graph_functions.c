@@ -331,10 +331,12 @@ void dijkstra(Graph *graph, int startVertex)
  */
 void freeGraph(Graph *graph)
 {
-    // Iterate over each vertex in the graph
+
+    //iterate over each vertex and free the adjacency list
     for (int i = 0; i < graph->numVertices; i++)
     {
-        // Free the adjacency list for the current vertex
+
+        //free the nodes in the adjacency list
         Node *temp = graph->adjList[i];
         while (temp)
         {
@@ -343,17 +345,5 @@ void freeGraph(Graph *graph)
             temp = next;
         }
     }
-
-    // Free the adjacency list array
-    free(graph->adjList);
-
-    // Free the adjacency matrix
-    for (int i = 0; i < graph->numVertices; i++)
-    {
-        free(graph->adjMatrix[i]);
-    }
-    free(graph->adjMatrix);
-
-    // Free the graph structure itself
     free(graph);
 }
