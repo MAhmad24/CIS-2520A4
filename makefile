@@ -10,6 +10,9 @@ EXEC = a4
 # Source files
 SRCS = graph_functions.c main.c
 
+# Header files
+HEADERS = graph.h
+
 # Default target
 all: $(EXEC)
 
