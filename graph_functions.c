@@ -267,30 +267,25 @@ void dfs(Graph *graph, int startVertex)
  */
 void dijkstra(Graph *graph, int startVertex)
 {
-
-    //array to store the shortest distance from the start vertex to each vertex
+    // Array to store shortest distances
     int dist[MAX_VERTICES];
-
-    //will be true if the vertex is included in the shortest path tree
     bool sptSet[MAX_VERTICES];
 
-    //initialize all distances as infinite and sptSet[] as false
+    // Initialize distances and sptSet
     for (int i = 0; i < graph->numVertices; i++)
     {
         dist[i] = INT_MAX;
         sptSet[i] = false;
     }
 
-    //distance of start vertex from itself is always 0
+    // Distance of source vertex from itself is always 0
     dist[startVertex] = 0;
 
-    //find shortest path for all vertices
+    // Find shortest path for all vertices
     for (int count = 0; count < graph->numVertices - 1; count++)
     {
-
-        //pick the minimum distance vertex from the set of vertices not yet processed
+        // Find minimum distance vertex from the unprocessed set
         int min = INT_MAX, minIndex;
-
         for (int v = 0; v < graph->numVertices; v++)
         {
             if (!sptSet[v] && dist[v] <= min)
@@ -300,28 +295,32 @@ void dijkstra(Graph *graph, int startVertex)
             }
         }
 
-        //mark the picked vertex as processed
+        // Mark picked vertex as processed
         int u = minIndex;
         sptSet[u] = true;
 
-        //update the distance value of the adjacent vertices of the picked vertex
-        for (int v = 0; v < graph->numVertices; v++)
+        // Update distances of adjacent vertices
+        Node *temp = graph->adjList[u];
+        while (temp)
         {
-
-            // Update dist[v] if it is not in sptSet, there is an edge from u to v,
-            // and the total weight of the path from startVertex to v through u is
-            // smaller than the current value of dist[v]
-            if (!sptSet[v] && graph->adjMatrix[u][v] && dist[u] != INT_MAX && dist[u] + graph->adjMatrix[u][v] < dist[v])
+            int v = temp->vertex;
+            // Get weight from adjacency matrix (this is allowed per requirements)
+            int weight = graph->adjMatrix[u][v];
+            
+            if (!sptSet[v] && dist[u] != INT_MAX && 
+                dist[u] + weight < dist[v])
             {
-                dist[v] = dist[u] + graph->adjMatrix[u][v];
+                dist[v] = dist[u] + weight;
             }
+            temp = temp->next;
         }
     }
 
-    printf("\nShortest distance from vertex 1:\n");
+    // Print results
+    printf("\nShortest distances from vertex %d:\n", startVertex + 1);
     for (int i = 0; i < graph->numVertices; i++)
     {
-        printf("Shortest distance from vertex 1 to vertex %d: %d\n", i + 1, dist[i]);
+        printf("To vertex %d: %d\n", i + 1, dist[i]);
     }
 }
 
