@@ -4,7 +4,7 @@
     This is already done for you*/
 void prompt(void)
 {
-
+    // Display the menu options to the user
     printf("\nMenu:\n");
     printf("1. Display Adjacency List\n");
     printf("2. Perform Breadth-First Search (BFS)\n");
