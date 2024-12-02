@@ -316,11 +316,12 @@ void dijkstra(Graph *graph, int startVertex)
         }
     }
 
-    // Print results
-    printf("\nShortest distances from vertex %d:\n", startVertex + 1);
+    // Print results with a blank line before output
+    printf("\n");
     for (int i = 0; i < graph->numVertices; i++)
     {
-        printf("To vertex %d: %d\n", i + 1, dist[i]);
+        printf("Shortest distance from vertex %d to vertex %d: %d\n", 
+               startVertex + 1, i + 1, dist[i]);
     }
 }
 
