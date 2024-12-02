@@ -15,11 +15,11 @@ all: $(EXEC)
 
 # Link source files to create the executable
 $(EXEC): $(SRCS)
-    $(CC) $(CFLAGS) -o $@ $(SRCS)
+	$(CC) $(CFLAGS) -o $@ $(SRCS)
 
 # Clean up build files
 clean:
-    rm -f $(EXEC)
+	rm -f $(EXEC)
 
 # Phony targets
 .PHONY: all clean
